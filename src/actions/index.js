@@ -8,9 +8,10 @@ const FETCHED = "FETCHED";
 export const fetchQuote = () => async dispatch => {
   try {
     dispatch(toggleLoading(true));
-    const response = await fetch("http://quotes.rest/qod.json");
+    const response = await fetch("https://api.myjson.com/bins/gl8ys");
     const json = await response.json();
-    const quote = json.contents.quotes[0]
+    const random = Math.round(Math.random() * json.quotes.length);
+    const quote = json.quotes[random];
     dispatch(setQuote(quote));
     dispatch(pushQuoteToList(quote));
     dispatch(toggleLoading(false));
